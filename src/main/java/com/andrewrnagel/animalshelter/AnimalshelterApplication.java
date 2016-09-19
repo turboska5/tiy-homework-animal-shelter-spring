@@ -1,8 +1,8 @@
 package com.andrewrnagel.animalshelter;
 
-import com.andrewrnagel.animalshelter.repo.AnimalRepo;
-import com.andrewrnagel.animalshelter.repo.NoteRepo;
-import com.andrewrnagel.animalshelter.repo.TypeRepo;
+import com.andrewrnagel.animalshelter.repo.AnimalRepository;
+import com.andrewrnagel.animalshelter.repo.NoteRepository;
+import com.andrewrnagel.animalshelter.repo.TypeRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,11 +10,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class AnimalshelterApplication {
 	@Autowired
-	private AnimalRepo animalRepo;
+	private AnimalRepository animalRepository;
 	@Autowired
-	private TypeRepo typeRepo;
+	private TypeRepository typeRepository;
 	@Autowired
-	private NoteRepo noteRepo;
+	private NoteRepository noteRepository;
+//	@Autowired
+//	private AnimalsService animalsService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AnimalshelterApplication.class, args);

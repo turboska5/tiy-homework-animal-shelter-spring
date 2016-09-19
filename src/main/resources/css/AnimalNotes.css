@@ -1,0 +1,149 @@
+header {
+    height: 65px;
+    margin: 0 auto;
+    border-width: 0;
+    background: #397f91 url("/images/paw-prints-horizontal.jpg") repeat;
+}
+.HeaderText{
+    background: rgba(21,118,169,0.90);
+    color: white;
+    height: 100%;
+    text-align: center;
+    font-size: xx-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav {
+    text-align: center;
+    background: rgba(182, 182, 182, 0.76);
+}
+nav ul {
+    margin: 0;
+}
+nav ul li {
+    display: inline-block;
+}
+nav ul li a {
+    display: block;
+    padding: 8px;
+}
+
+h2 {
+    font-size: xx-large;
+    text-decoration: underline;
+    margin: 0 auto;
+}
+body {
+    font-family: sans-serif;
+}
+article div {
+    align-content: left;
+}
+input {
+    padding: .5em;
+}
+Button.DeleteButton {
+    background: url("/images/RedX.png") no-repeat;
+    background-size: 100%;
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+Button.DeleteButton:active {
+    background-color: maroon;
+    transform: translateY(1px);
+}
+p{
+    margin: 2px;
+}
+.AnimalNotes {
+    border-width: 0;
+    padding: 1px 8px 10px;
+    margin: 0 auto;
+    font-size: x-large;
+}
+.AnimalCard {
+    clear: left;
+}
+.AnimalPicture img{
+    height: 200px;
+    width: 200px;
+    max-width: 200px;
+    max-height: 200px;
+    padding: 10px;
+    border: thin solid black;
+    float: left;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+.AnimalName{
+    font-size: x-large;
+}
+.LabelText {
+    font-weight: bold;
+}
+.AnimalStats {
+    list-style-type: none;
+    float:left;
+    display: list-item;
+    padding: 0;
+    margin: 0;
+}
+.AnimalStats ul {
+    list-style-type: none;
+    padding: 0 0 0 10px;
+    margin: 0;
+}
+.AnimalNotesTable {
+    clear: left;
+}
+table {
+    border: thin black solid;
+    border-collapse: collapse;
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+    width: 50%;
+}
+table * {
+    padding: .25em;
+}
+th{
+    background-color: #1576a9;
+    border-bottom: 2px solid black;
+    color: white;
+}
+th:first-child {
+    border-right: 1px solid black;
+}
+td{
+    font-size: small;
+}
+td:first-child {
+    border-right: 1px solid black;
+}
+td:last-child {
+    text-align: right;
+}
+tr:nth-child(2n+1) {
+    background-color: #ebebeb;
+}
+.AddAnimalNote {
+    border-width: 0;
+    padding-top: 10px;
+    padding-left: 8px;
+    margin: 0 auto;
+}
+.AddAnimalNoteText {
+    padding: 5px;
+    width: 35%;
+    height: 3.5em;
+    resize: vertical;
+}
+.AddNoteButton {
+    margin-left: 8px;
+    padding: .5em;
+}

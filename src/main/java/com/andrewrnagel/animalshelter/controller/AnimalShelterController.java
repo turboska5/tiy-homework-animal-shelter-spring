@@ -2,11 +2,13 @@ package com.andrewrnagel.animalshelter.controller;
 
 import com.andrewrnagel.animalshelter.entity.Animal;
 import com.andrewrnagel.animalshelter.entity.Type;
-import com.andrewrnagel.animalshelter.entity.Note;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import java.util.ArrayList;
 
 /**
  * Created by Andrew Nagel and Jimmy Bush on 9/19/16 at 2:16 PM EST.
@@ -16,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class AnimalShelterController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String animal(Animal animal, Model model) {
+    public String getAnimal(Animal animal, Model model) {
         model.addAttribute("animal", animal);
-        return "animal";
+        return "/WEB-INF/ListAnimals.jsp";
     }
 
 //    @RequestMapping(path = "/describeMe", method = RequestMethod.GET)
