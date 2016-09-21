@@ -18,14 +18,17 @@ public class Note {
     @Column(name = "note_ID")
     private int noteID;
 
-    @Column(name = "animal_ID")
-    private int animalID;
+//    @Column(name = "animal_ID", nullable = false, unique = true)
+//    private int animalID;
 
-    @Column(name = "note_content")
+    @Column(name = "note_content", nullable = false)
     private String noteContent;
 
-    @Column(name = "created_on")
+    @Column(name = "created_on", nullable = false)
     private LocalDate noteCreationDate;
+
+//    @ManyToOne
+//    private Animal animal;
 
     //constructors
     //default constructor
@@ -54,14 +57,14 @@ public class Note {
         this.noteContent = noteContent;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.noteCreationDate = LocalDate.parse(date, formatter);
-        this.animalID = animalID;
+//        this.animalID = animalID;
     }
 
     //constructor for note (animalID, content, with date set automatically to NOW, based on location)
     //used by note web servlet
     public Note(int animalID, String noteContent) {
         this.noteContent = noteContent;
-        this.animalID = animalID;
+        //this.animalID = animalID;
         this.noteCreationDate = LocalDate.now();
     }
 

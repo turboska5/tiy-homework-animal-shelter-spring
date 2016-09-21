@@ -2,12 +2,21 @@ package com.andrewrnagel.animalshelter.controller;
 
 import com.andrewrnagel.animalshelter.entity.Animal;
 import com.andrewrnagel.animalshelter.entity.Type;
+import com.andrewrnagel.animalshelter.entity.Note;
 
+import com.andrewrnagel.animalshelter.repo.AnimalRepository;
+import com.andrewrnagel.animalshelter.repo.NoteRepository;
+import com.andrewrnagel.animalshelter.repo.TypeRepository;
+import com.andrewrnagel.animalshelter.service.AnimalsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -17,19 +26,52 @@ import java.util.ArrayList;
 @Controller
 public class AnimalShelterController {
 
+    @Autowired
+    private AnimalsService animalsService;
+
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String getAnimal(Animal animal, Model model) {
-        model.addAttribute("animal", animal);
-        return "/WEB-INF/ListAnimals.jsp";
+    public String redirectMainPage() throws SQLException {
+        return "redirect:/ListAnimals";
     }
 
-//    @RequestMapping(path = "/describeMe", method = RequestMethod.GET)
-//    public String describeMeForm(){
-//        return "describeMeForm";
-//    }
-//
-//    @RequestMapping(path = "/describeMe", method = RequestMethod.POST)
-//    public String describeMeButton(Person person) {
-//        return "person";
-//    }
+    @RequestMapping(path = "/ListAnimals", method = RequestMethod.GET)
+    public String loadMainPage(Model model) throws SQLException {
+        model.addAttribute("typesList", animalsService.getAllTypes());
+        model.addAttribute("animalList", animalsService.getAllAnimals());
+        return "ListAnimals";
+    }
+
+    //TODO
+    @RequestMapping(path = "/ListAnimals", method = RequestMethod.POST)
+    public String searchAnimals() throws SQLException {
+        return "redirect:/ListAnimals";
+    }
+
+    @RequestMapping(path = "/EditAnimals", method = RequestMethod.GET)
+    public String loadEditPage(Animal animal, Model model) throws SQLException {
+        model.addAttribute("typesList", animalsService.getAllTypes());
+        return "EditAnimals";
+    }
+
+    @RequestMapping(path = "/EditAnimals", method = RequestMethod.POST)
+    public String addAnimal(Animal animal) throws SQLException {
+        animalsService.addAnimal(animal);
+        return "redirect:/ListAnimals";
+    }
+
+    @RequestMapping(path = "/AnimalNotes", method = RequestMethod.GET)
+    public String loadNotePage(Model model,
+                               @RequestParam(defaultValue = "0") Integer animalID) throws SQLException {
+        model.addAttribute("animal", animalsService.getAnimal(animalID));
+        return "AnimalNotes";
+    }
+
+    //TODO
+    @RequestMapping(path = "/DeleteNote", method = RequestMethod.GET)
+    public String deleteNote(Model model,
+                             @RequestParam(defaultValue = "0") Integer animalID,
+                             @RequestParam(defaultValue = "0") Integer noteID) throws SQLException {
+        model.addAttribute("animal", animalsService.getAnimal(animalID));
+        return "redirect:/AnimalNotes?animalID=" + animalID;
+    }
 }

@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>animalshelter</name>
-	<description>Animal Shelter Spring Hibernate implementation</description>
+	<description>Animal Shelter: Spring Hibernate</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

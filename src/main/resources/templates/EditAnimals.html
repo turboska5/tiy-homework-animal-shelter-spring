@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8"/>
         <title>Animal Shelter</title>
-        <link rel="stylesheet" href="../css/EditAnimals.css">
-        <link rel="icon" href="../images/doghouse512px.png">
+        <link th:href="@{css/EditAnimals.css}" href="../static/css/EditAnimals.css" rel="stylesheet" type="text/css"/>
+        <link th:href="@{images/Icon.png}" href="../static/images/Icon.png" rel="icon"/>
         <header>
             <div class="HeaderText">
-            <h1>Animal Shelter</h1>
+                <h1>Animal Shelter</h1>
             </div>
         </header>
         <nav>
             <ul>
-                <li><a href="ListAnimals.html">List Animals</a></li>
-                <li><a href="EditAnimals.html">Add an Animal</a></li>
+                <li><a th:href="ListAnimals" href="/animalshelter/templates/ListAnimals.html">List Animals</a></li>
+                <li><a th:href="EditAnimals" href="/animalshelter/templates/EditAnimals.html">Add an Animal</a></li>
             </ul>
         </nav>
     </head>
@@ -21,42 +21,41 @@
         <section>
             <div class="EditAnimal">
                 <h2>Add/Edit An Animal</h2>
-                <p>Note: (*) indicates a required field!</p><br>
+                <p>Note: (*) indicates a required field!</p><br/>
                     <div>
-                        <form class="AnimalDetails" action="ListAnimals.html" method="post">
+                        <form class="AnimalDetails" th:action="EditAnimals" action="/animalshelter/templates/ListAnimals.html" method="post">
                             <div class="LabelText">
                                 <label for="name">Name*: </label>
                             </div>
                             <div>
-                                <input type="text" placeholder="Name" id="name" name="name" value="Bob"><br>
+                                <input type="text" placeholder="Name" id="name" name="name" value="Bob"/><br/>
                             </div>
                             <div class="LabelText">
-                                <label for="species">Species*: </label>
+                                <label for="type">Type*: </label>
                             </div>
                             <div>
-                                <select name="species" id="species">
-                                    <option value="" disabled>Type</option>
-                                    <option value="" selected>Cat</option>
-                                    <option value="">Dog</option>
-                                </select><br>
+                                <select name="type" id="type">
+                                    <option value="" disabled="true" selected="true">Type</option>
+                                    <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" value="" th:text="${type.getType()}">Cat</option>
+                                </select><br/>
                             </div>
                             <div class="LabelText">
                                 <label for="breed">Breed: </label>
                             </div>
                             <div>
-                                <input type="text" placeholder="" id="breed" name="breed"><br>
+                                <input type="text" placeholder="" id="breed" name="breed"/><br/>
                             </div>
                             <div class="LabelText">
-                                <label for="desc">Description*: </label>
+                                <label for="description">Description*: </label>
                             </div>
                             <div>
-                                <textarea id="desc" placeholder="Description" maxlength=64>Big fat and fuzzy</textarea><br>
+                                <textarea id="description" placeholder="Description" maxlength="64" name="description">Big fat and fuzzy</textarea><br/>
                             </div>
                             <div class="LabelText">
                                 <label for="photo">Photo: </label>
                             </div>
                             <div>
-                                <input type="file" class=fileupload id="photo" name="photo"><br>
+                                <input type="file" class="fileupload" id="photo" name="photo"/><br/>
                             </div>
                             <div class="LabelText">
                                 <label for="save"></label>

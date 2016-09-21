@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8"/>
         <title>Animal Shelter</title>
-        <link rel="stylesheet" href="../css/AnimalNotes.css">
-        <link rel="icon" href="../images/doghouse512px.png">
+        <link th:href="@{css/AnimalNotes.css}" href="../static/css/AnimalNotes.css" rel="stylesheet" type="text/css"/>
+        <link th:href="@{images/Icon.png}" href="../static/images/Icon.png" rel="icon"/>
         <header>
             <div class="HeaderText">
                  <h1>Animal Shelter</h1>
@@ -12,8 +12,8 @@
         </header>
         <nav>
             <ul>
-                <li><a href="ListAnimals.html">List Animals</a></li>
-                <li><a href="EditAnimals.html">Add an Animal</a></li>
+                <li><a th:href="ListAnimals" href="/animalshelter/templates/ListAnimals.html">List Animals</a></li>
+                <li><a th:href="EditAnimals" href="/animalshelter/templates/EditAnimals.html">Add an Animal</a></li>
             </ul>
         </nav>
     </head>
@@ -24,14 +24,15 @@
             </div>
             <article class="AnimalCard">
                 <div class="AnimalPicture">
-                    <img src="../images/Cat.png" alt="Cat"/>
+                    <!--<img th:src="@{ ${animal.getPicture()} }" src="../static/images/Cat.png" alt="Cat"/>-->
+                    <img th:src="@{ ${animal.getPicture()} }" src="../static/images/Cat.png" alt=""/>
                 </div>
                 <div class="AnimalStats">
                     <ul>
-                        <h1><a href="EditAnimals.html" class="AnimalName">Bob</a></h1>
-                        <li><span class="LabelText">Type: </span>Cat</li>
-                        <li><span class="LabelText">Breed: </span>Tabby</li>
-                        <li><span class="LabelText">Description: </span>Big fat and fuzzy</li>
+                        <h1><a th:href="EditAnimals" href="/animalshelter/templates/EditAnimals.html" class="AnimalName" th:text="${animal.getName()}">Bob</a></h1>
+                        <li><span class="LabelText">Type: </span><span th:text="${animal.getType().getType()}">Cat</span></li>
+                        <li><span class="LabelText">Breed: </span><span th:text="${animal.getBreed()}">Tabby</span></li>
+                        <li><span class="LabelText">Description: </span><span th:text="${animal.getDescription()}">Big fat and fuzzy</span></li>
                     </ul>
                 </div>
             </article>
@@ -43,15 +44,10 @@
                             <th>Note</th>
                             <th> </th>
                         </tr>
-                        <tr>
-                            <td>08/29/16</th>
-                            <td>Went to visit vet.</td>
-                            <td><button class="DeleteButton"></button></td>
-                        </tr>
-                        <tr>
-                            <td>08/30/16</th>
-                            <td>Only eats filet mignon.</td>
-                            <td><button class="DeleteButton"></button></td>
+                        <tr th:each="note : ${animal.getAnimalNotes()}">
+                            <td th:text="${note.getNoteCreationDateAsString()}">08/29/16</td>
+                            <td th:text="${note.getNoteContent()}">Went to visit vet.</td>
+                            <td><button class="DeleteButton"><a th:href="@{/DeleteNote?(animalID=${animal.getAnimalID()}, noteID=${note.getNoteID()})}"></a></button></td>
                         </tr>
                     </table>
                 </div>
@@ -60,7 +56,7 @@
                 <div class="AddAnimalNote">
                     Add a note:
                     <p>
-                        <textarea class="AddAnimalNoteText">This cat seriously needs a bath. This means we need to buy some chainmail.</textarea>
+                        <textarea class="AddAnimalNoteText" th:text="${''}">This cat seriously needs a bath. This means we need to buy some chainmail.</textarea>
                     </p>
                 </div>
                 <div>

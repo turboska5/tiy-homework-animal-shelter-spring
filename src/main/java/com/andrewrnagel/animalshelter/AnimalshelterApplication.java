@@ -15,8 +15,6 @@ public class AnimalshelterApplication {
 	private TypeRepository typeRepository;
 	@Autowired
 	private NoteRepository noteRepository;
-//	@Autowired
-//	private AnimalsService animalsService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AnimalshelterApplication.class, args);

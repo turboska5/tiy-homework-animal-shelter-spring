@@ -1,7 +1,9 @@
 package com.andrewrnagel.animalshelter.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import static java.lang.String.format;
 
@@ -15,31 +17,29 @@ public class Animal {
     //object properties
     @Id
     @GeneratedValue
-    @Column(name = "animal_ID")
+    @Column(name = "animal_ID", nullable = false, unique = true)
     private int animalID;
 
-    @Column(name = "animal_name")
+    @Column(name = "animal_name", nullable = false)
     private String name;
-
-    //@ManyToOne
-    //@JoinColumn(name = "type_ID")
-    @Column(name = "type_ID")
-    private int typeID;
 
     @Column(name = "breed")
     private String breed = "";
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "image_url")
-    private String picture = "/images/X.jpg";
+    //TODO: separate lookup table for default images?
+    @Column(name = "image_url", nullable = false)
+    private String picture = "images/X.jpg";
 
-    @Transient
-    private ArrayList<Note> animalNotes = new ArrayList<>();
-
-    @Transient
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    //@JoinColumn(name = "animal_ID")
     private Type animalType = new Type();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "animal_ID")
+    private Set<Note> animalNotes = new HashSet<>();
 
     //constructors
     //default constructor
@@ -99,19 +99,19 @@ public class Animal {
         return this.description;
     }
 
-    public String getType() {
-        return this.animalType.getType();
+    public Type getType() {
+        return this.animalType;
     }
 
     public int getAnimalID() {
         return this.animalID;
     }
 
-    public int getAnimalTypeID() {
-        return this.animalType.getTypeID();
-    }
+//    public int getAnimalTypeID() {
+//        return this.animalType.getTypeID();
+//    }
 
-    public ArrayList<Note> getAnimalNotes() {
+    public Set<Note> getAnimalNotes() {
         return this.animalNotes;
     }
 
@@ -132,19 +132,25 @@ public class Animal {
         this.description = description;
     }
 
-    public void setType(String type) {
-        this.animalType.setType(type);
+    public void setType(Type type) {
+        this.animalType = type;
+        if(this.animalType.getType() == "Cat") {
+            this.setPicture("images/Cat.png");
+        } else if(this.animalType.getType() == "Dog") {
+            this.setPicture("images/Dog.jpg");
+        } else {
+        }
     }
 
     public void setAnimalID(int animalID) {
         this.animalID = animalID;
     }
 
-    public void setAnimalTypeID(int animalTypeID) {
-        this.animalType.setTypeID(animalTypeID);
-    }
+//    public void setAnimalTypeID(int animalTypeID) {
+//        this.animalType.setTypeID(animalTypeID);
+//    }
 
-    public void setAnimalNotes(ArrayList<Note> animalNotes) {
+    public void setAnimalNotes(Set<Note> animalNotes) {
         this.animalNotes = animalNotes;
     }
 
@@ -152,32 +158,36 @@ public class Animal {
         this.picture = URL;
     }
 
-    //toString
-    public String toString() {
-        String animalNotes = "";
-        String animalStats = format("%-12s %-32s\n%-12s %-32s\n%-12s %-32s\n%-12s %-64s\n",
-                "Name:", this.name,
-                "Type:", this.animalType.getType(),
-                "Breed (opt):", this.breed,
-                "Description:", this.description);
-        if(this.getAnimalNotes().isEmpty()) {
-            animalNotes = String.format("%-12s %-64s\n", "Notes:", "No animal notes found for this animal.");
-        } else {
-            //iterate through and generate string
-            for(int i = 0; i < getAnimalNotes().size(); i++) {
-                if(i == 0){
-                    String noteOne = getAnimalNotes().get(0).getNoteCreationDateAsString().toString() + ": "
-                            + getAnimalNotes().get(0).getNoteContent();
-                    animalNotes = String.format("%-12s %-64s\n", "Notes:", noteOne);
-                } else {
-                    String noteNow = getAnimalNotes().get(i).getNoteCreationDateAsString().toString() + ": "
-                            + getAnimalNotes().get(i).getNoteContent();
-                    String currentNote = String.format("%-12s %-64s\n", "", noteNow);
-                    animalNotes = animalNotes + currentNote;
-                }
-            }
-        }
-        return animalStats+animalNotes;
+//    //toString
+//    public String toString() {
+//        String animalNotes = "";
+//        String animalStats = format("%-12s %-32s\n%-12s %-32s\n%-12s %-32s\n%-12s %-64s\n",
+//                "Name:", this.name,
+//                "Type:", this.animalType.getType(),
+//                "Breed (opt):", this.breed,
+//                "Description:", this.description);
+//        if(this.getAnimalNotes().isEmpty()) {
+//            animalNotes = String.format("%-12s %-64s\n", "Notes:", "No animal notes found for this animal.");
+//        } else {
+//            //iterate through and generate string
+//            for(int i = 0; i < getAnimalNotes().size(); i++) {
+//                if(i == 0){
+//                    String noteOne = getAnimalNotes().get(0).getNoteCreationDateAsString().toString() + ": "
+//                            + getAnimalNotes().get(0).getNoteContent();
+//                    animalNotes = String.format("%-12s %-64s\n", "Notes:", noteOne);
+//                } else {
+//                    String noteNow = getAnimalNotes().get(i).getNoteCreationDateAsString().toString() + ": "
+//                            + getAnimalNotes().get(i).getNoteContent();
+//                    String currentNote = String.format("%-12s %-64s\n", "", noteNow);
+//                    animalNotes = animalNotes + currentNote;
+//                }
+//            }
+//        }
+//        return animalStats+animalNotes;
+//    }
+
+    //pictureGeneration
+    public void setPic() {
     }
 
     //disk serialization operations

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8"/>
         <title>Animal Shelter</title>
-        <link rel="stylesheet" href="../css/ListAnimals.css">
-        <link rel="icon" href="../images/doghouse512px.png">
+        <link th:href="@{css/ListAnimals.css}" href="../static/css/ListAnimals.css" rel="stylesheet" type="text/css"/>
+        <link th:href="@{images/Icon.png}" href="../static/images/Icon.png" rel="icon"/>
         <header>
             <div class="HeaderText">
-                 <h1>Animal Shelter</h1>
+                <h1>Animal Shelter</h1>
             </div>
         </header>
         <nav>
             <ul>
-                <li><a href="ListAnimals.html">List Animals</a></li>
-                <li><a href="EditAnimals.html">Add an Animal</a></li>
+                <li><a th:href="ListAnimals" href="/animalshelter/templates/ListAnimals.html">List Animals</a></li>
+                <li><a th:href="EditAnimals" href="/animalshelter/templates/EditAnimals.html">Add an Animal</a></li>
             </ul>
         </nav>
     </head>
@@ -23,70 +23,29 @@
                 <h2>List Animals</h2>
                 <p>Search for an animal:</p>
                     <form action="" method="post">
-                        <input type="text" placeholder="Name" id="name" name="name">
-                        <select name="type" th:field="${type.}">
-                            //<option value="0" disabled selected>Type</option>
-                            <!--/*@thymesVar id="type" type="com.andrewrnagel.springit.entity.Type"*/-->
-                            <!--<option value="0" th:text="select operator"></option>-->
-                            <!--<option th:each="type : ${type}" th:value="${types.type_id}" th:text="${type.type_name}"></option>-->
+                    <!--<form th:action="@{ListAnimals(name=?.${}, type=?.${}, animalID=?.${})}" action="" method="post">-->
+                        <input type="text" placeholder="Name" id="name" name="name"/>
+                        <select name="type">
+                            <option value="" disabled="true" selected="true">Type</option>
+                            <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" value="" th:text="${type.getType()}">Cat</option>
                         </select>
-                        <input type="number" placeholder="ID" id="id" name="id">
+                        <input type="number" placeholder="ID" id="id" name="id" min="1"/>
                         <button>Search</button>
                     </form>
             </div>
-            <article class="AnimalCard">
+            <!--/*@thymesVar id="animalList" type="java.util.List"*/-->
+            <!--/*@thymesVar id="animal" type="com.andrewrnagel.animalshelter.entity.Animal"*/-->
+            <article class="AnimalCard" th:each="animal : ${animalList}">
                 <div class="AnimalPicture">
-                    <img src="../images/Cat.png" alt="Cat"/>
+                    <img th:src="@{ ${animal.getPicture()} }" src="../static/images/Cat.png" alt=""/>
                 </div>
                 <div class="AnimalStats">
                     <ul>
-                        <h1><a href="EditAnimals.html" class="AnimalName">Bob</a></h1>
-                        <li><span class="LabelText">Type: </span>Cat</li>
-                        <li><span class="LabelText">Breed: </span>Tabby</li>
-                        <li><span class="LabelText">Description: </span>Big fat and fuzzy</li>
-                        <li><span class="LabelText">Notes: </span><a href="AnimalNotes.html">5 notes</a> </li>
-                    </ul>
-                </div>
-            </article>
-            <article class="AnimalCard">
-                <div class="AnimalPicture">
-                    <img src="../images/Dog.jpg" alt="Dog"/>
-                </div>
-                <div class="AnimalStats">
-                    <ul>
-                        <h1><a href="" class="AnimalName">Wanda</a></h1>
-                        <li><span class="LabelText">Type: </span>Dog</li>
-                        <li><span class="LabelText">Breed: </span>Bulldog</li>
-                        <li><span class="LabelText">Description: </span>A handsome beast</li>
-                        <li><span class="LabelText">Notes: </span><a href="AnimalNotes.html">3 notes</a> </li>
-                    </ul>
-                </div>
-            </article>
-            <article class="AnimalCard">
-                <div class="AnimalPicture">
-                    <img src="../images/X.jpg" alt="Blank"/>
-                </div>
-                <div class="AnimalStats">
-                    <ul>
-                        <h1><a href="" class="AnimalName">Peter Parker</a></h1>
-                        <li><span class="LabelText">Type: </span>Spider</li>
-                        <li><span class="LabelText">Breed: </span>Tarantula</li>
-                        <li><span class="LabelText">Description: </span>Seriously, who gets a pet spider?!</li>
-                        <li><span class="LabelText">Notes: </span><a href="AnimalNotes.html">0 notes</a> </li>
-                    </ul>
-                </div>
-            </article>
-            <article class="AnimalCard">
-                <div class="AnimalPicture">
-                    <img src="../images/X.jpg" alt="Blank"/>
-                </div>
-                <div class="AnimalStats">
-                    <ul>
-                        <h1><a href="" class="AnimalName">Thor</a></h1>
-                        <li><span class="LabelText">Type: </span>Fish</li>
-                        <li><span class="LabelText">Breed: </span>Goldfish</li>
-                        <li><span class="LabelText">Description: </span>It's orange.</li>
-                        <li><span class="LabelText">Notes: </span><a href="AnimalNotes.html">1 note</a> </li>
+                        <h1><a th:href="EditAnimals" href="/animalshelter/templates/EditAnimals.html" class="AnimalName" th:text="${animal.getName()}">Bob</a></h1>
+                        <li><span class="LabelText">Type: </span><span th:text="${animal.getType().getType()}">Cat</span></li>
+                        <li><span class="LabelText">Breed: </span><span th:text="${animal.getBreed()}">Tabby</span></li>
+                        <li><span class="LabelText">Description: </span><span th:text="${animal.getDescription()}">Big fat and fuzzy</span></li>
+                        <li><span class="LabelText">Notes: </span><a th:href="@{/AnimalNotes?(animalID=${animal.getAnimalID()})}" href="/animalshelter/templates/AnimalNotes.html" th:text="${animal.getAnimalNotes().size() + ' note(s)'}">0 notes</a> </li>
                     </ul>
                 </div>
             </article>

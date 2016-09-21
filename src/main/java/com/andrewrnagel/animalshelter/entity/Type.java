@@ -1,6 +1,7 @@
 package com.andrewrnagel.animalshelter.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Andrew Nagel on 9/12/16 at 3:38 PM EST.
@@ -12,11 +13,14 @@ public class Type {
     //object properties
     @Id
     @GeneratedValue
-    @Column(name = "type_ID")
+    @Column(name = "type_ID", nullable = false, unique = true)
     private int typeID;
 
-    @Column(name = "type_name")
+    @Column(name = "type_name", nullable = false, unique = true)
     private String type;
+
+//    @OneToMany(mappedBy = "type")
+//    private List<Animal> animalsWithType;
 
     //constructors
     //default constructor
