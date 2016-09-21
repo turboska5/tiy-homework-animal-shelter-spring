@@ -66,12 +66,19 @@ public class AnimalShelterController {
         return "AnimalNotes";
     }
 
-    //TODO
+    @RequestMapping(path = "/AnimalNotes", method = RequestMethod.POST)
+    public String addNote(int animalID, String noteContent) throws SQLException {
+        Note note = new Note(animalsService.getAnimal(animalID), noteContent);
+        animalsService.addNote(note);
+        return "redirect:/AnimalNotes?animalID=" + animalID;
+    }
+
     @RequestMapping(path = "/DeleteNote", method = RequestMethod.GET)
     public String deleteNote(Model model,
                              @RequestParam(defaultValue = "0") Integer animalID,
                              @RequestParam(defaultValue = "0") Integer noteID) throws SQLException {
         model.addAttribute("animal", animalsService.getAnimal(animalID));
+        animalsService.deleteNote(noteID);
         return "redirect:/AnimalNotes?animalID=" + animalID;
     }
 }

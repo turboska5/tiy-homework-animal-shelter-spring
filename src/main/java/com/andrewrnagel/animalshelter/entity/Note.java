@@ -27,8 +27,8 @@ public class Note {
     @Column(name = "created_on", nullable = false)
     private LocalDate noteCreationDate;
 
-//    @ManyToOne
-//    private Animal animal;
+    @Transient
+    private Animal animal;
 
     //constructors
     //default constructor
@@ -62,9 +62,9 @@ public class Note {
 
     //constructor for note (animalID, content, with date set automatically to NOW, based on location)
     //used by note web servlet
-    public Note(int animalID, String noteContent) {
+    public Note(Animal animal, String noteContent) {
         this.noteContent = noteContent;
-        //this.animalID = animalID;
+        this.animal = animal;
         this.noteCreationDate = LocalDate.now();
     }
 

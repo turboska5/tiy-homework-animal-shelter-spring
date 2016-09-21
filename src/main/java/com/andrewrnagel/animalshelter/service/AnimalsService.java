@@ -57,6 +57,17 @@ public class AnimalsService {
         return this.animalRepository.findOne(index);
     }
 
+    //Add a note to the note table
+    public  void addNote(Note note) throws SQLException{
+        this.noteRepository.save(note);
+    }
+
+    //Add a note to the note table
+    public  void deleteNote(int noteID) throws SQLException{
+        this.noteRepository.delete(noteID);
+    }
+
+
 //    //return all Note objects in an arrayList given animalID
 //    public List<Note> getAllAnimalNotesByAnimalID(int animalID) throws SQLException {
 //        return this.noteRepository.findByAnimalID(animalID);

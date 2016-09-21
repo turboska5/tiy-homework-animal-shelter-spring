@@ -53,15 +53,18 @@
                 </div>
             </article>
             <article>
-                <div class="AddAnimalNote">
-                    Add a note:
-                    <p>
-                        <textarea class="AddAnimalNoteText" th:text="${''}">This cat seriously needs a bath. This means we need to buy some chainmail.</textarea>
-                    </p>
-                </div>
-                <div>
-                    <button class="AddNoteButton">Add Note</button>
-                </div>
+                <form class="AddNote" action="/AnimalNotes" method="post">
+                    <input type="hidden" id="animalID" name="animalID" th:value="${animal.getAnimalID()}" />
+                    <div class="AddAnimalNote">
+                        Add a note:
+                        <p>
+                            <textarea class="AddAnimalNoteText" id="noteContent" name="noteContent" th:text="${''}">This cat seriously needs a bath. This means we need to buy some chainmail.</textarea>
+                        </p>
+                    </div>
+                    <div>
+                        <button class="AddNoteButton">Add Note</button>
+                    </div>
+                </form>
             </article>
         </section>
     </body>
