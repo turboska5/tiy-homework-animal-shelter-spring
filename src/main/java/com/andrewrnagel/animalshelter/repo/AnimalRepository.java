@@ -12,10 +12,7 @@ import java.util.List;
 public interface AnimalRepository extends JpaRepository<Animal, Integer> {
 
 //    @Query(value = "SELECT * FROM animals WHERE animal_ID = ?1", nativeQuery = true)
-//    Animal findAnimalByAnimalID(int animalID);
 
     //return list of animals given type (string)
     //List<Animal> findByType(int typeID);
-
-
 }

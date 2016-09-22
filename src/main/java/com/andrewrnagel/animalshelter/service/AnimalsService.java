@@ -46,6 +46,11 @@ public class AnimalsService {
     public void addAnimal(Animal animal) throws SQLException {
         this.animalRepository.save(animal);
     }
+//
+//    //update animal from specified index with updated animal object in animal table
+//    public void updateAnimal(Animal animal) throws SQLException {
+//        this.animalRepository.save(this.animalRepository.findOne(animal.getAnimalID()));
+//    }
 
     //remove animal from specified index in animal table
     public void deleteAnimal(Animal animal) throws SQLException {
@@ -110,10 +115,6 @@ public class AnimalsService {
 //    }
 //
 //
-//    //update animal from specified index with updated animal object in animal table
-//    public void updateAnimal(Animal animal) throws SQLException {
-//        this.animalRepository.updateAnimal(animal);
-//    }
 //
 //    //return arrayList holding all note objects from note table
 //    public ArrayList<Note> getAllAnimalNotes() throws SQLException {

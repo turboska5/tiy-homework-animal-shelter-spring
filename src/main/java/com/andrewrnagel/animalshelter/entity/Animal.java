@@ -85,6 +85,17 @@ public class Animal {
         this.animalType.setTypeID(typeID);
     }
 
+    //constructor without breed
+    //used in web version when creating a new animal without a breed supplied by user
+    public Animal(Integer animalID, String name, String type, String description, int typeID, Set<Note> animalNotes) {
+        this.animalID = animalID;
+        this.name = name;
+        this.description = description;
+        this.animalType.setType(type);
+        this.animalType.setTypeID(typeID);
+        this.setAnimalNotes(animalNotes);
+    }
+
     //methods
     //getters
     public String getName() {

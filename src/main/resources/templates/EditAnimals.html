@@ -24,11 +24,12 @@
                 <p>Note: (*) indicates a required field!</p><br/>
                     <div>
                         <form class="AnimalDetails" th:action="EditAnimals" action="/animalshelter/templates/ListAnimals.html" method="post">
+                            <input type="hidden" id="animalID" name="animalID" th:value="${animal.getAnimalID()}" />
                             <div class="LabelText">
                                 <label for="name">Name*: </label>
                             </div>
                             <div>
-                                <input type="text" placeholder="Name" id="name" name="name" value="Bob"/><br/>
+                                <input type="text" placeholder="Name" id="name" name="name" th:value="${animal.getName()}" value="Bob"/><br/>
                             </div>
                             <div class="LabelText">
                                 <label for="type">Type*: </label>
@@ -36,6 +37,7 @@
                             <div>
                                 <select name="type" id="type">
                                     <option value="" disabled="true" selected="true">Type</option>
+                                    <!--th:if="value = ${animal.getType}-->
                                     <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" value="" th:text="${type.getType()}">Cat</option>
                                 </select><br/>
                             </div>
@@ -43,13 +45,13 @@
                                 <label for="breed">Breed: </label>
                             </div>
                             <div>
-                                <input type="text" placeholder="" id="breed" name="breed"/><br/>
+                                <input type="text" placeholder="" id="breed" name="breed" th:value="${animal.getBreed()}"/><br/>
                             </div>
                             <div class="LabelText">
                                 <label for="description">Description*: </label>
                             </div>
                             <div>
-                                <textarea id="description" placeholder="Description" maxlength="64" name="description">Big fat and fuzzy</textarea><br/>
+                                <textarea id="description" placeholder="Description" maxlength="64" name="description" th:text="${animal.getDescription()}">Big fat and fuzzy</textarea><br/>
                             </div>
                             <div class="LabelText">
                                 <label for="photo">Photo: </label>
