@@ -22,14 +22,14 @@
             <div class="AnimalSearch">
                 <h2>List Animals</h2>
                 <p>Search for an animal:</p>
-                    <form action="" method="post">
+                    <form th:action="ListAnimals" method="get">
                     <!--<form th:action="@{ListAnimals(name=?.${}, type=?.${}, animalID=?.${})}" action="" method="post">-->
                         <input type="text" placeholder="Name" id="name" name="name"/>
                         <select name="type">
                             <option value="" disabled="true" selected="true">Type</option>
                             <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" value="" th:text="${type.getType()}">Cat</option>
                         </select>
-                        <input type="number" placeholder="ID" id="id" name="id" min="1"/>
+                        <input type="number" placeholder="ID" id="animalID" name="animalID" min="1"/>
                         <button>Search</button>
                     </form>
             </div>

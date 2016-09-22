@@ -36,16 +36,19 @@ public class AnimalShelterController {
     }
 
     @RequestMapping(path = "/ListAnimals", method = RequestMethod.GET)
-    public String loadMainPage(Model model) throws SQLException {
-        model.addAttribute("typesList", animalsService.getAllTypes());
-        model.addAttribute("animalList", animalsService.getAllAnimals());
-        return "ListAnimals";
-    }
-
-    //TODO
-    @RequestMapping(path = "/ListAnimals", method = RequestMethod.POST)
-    public String searchAnimals() throws SQLException {
-        return "redirect:/ListAnimals";
+    public String searchAnimals(Model model,
+                                @RequestParam(defaultValue = "") String name,
+                                @RequestParam(defaultValue = "0") Integer type,
+                                @RequestParam(defaultValue = "0") Integer animalID) throws SQLException {
+        if (name.isEmpty() && type.equals(0) && animalID.equals(0)) {
+            model.addAttribute("typesList", animalsService.getAllTypes());
+            model.addAttribute("animalList", animalsService.getAllAnimals());
+            return "ListAnimals";
+        } else {
+            model.addAttribute("typesList", animalsService.getAllTypes());
+            model.addAttribute("animalList", animalsService.searchAndDisplayAnimals(animalID, type, name));
+            return "ListAnimals";
+        }
     }
 
     @RequestMapping(path = "/EditAnimals", method = RequestMethod.GET)

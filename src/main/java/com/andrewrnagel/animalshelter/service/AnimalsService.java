@@ -37,10 +37,19 @@ public class AnimalsService {
         return this.typeRepository.findAll();
     }
 
-//    //return list holding stored animal objects by type (sans notes)
-//    public List<Animal> findAllAnimalsByType(int typeID) throws SQLException {
-//        return this.animalRepository.findByType(typeID);
-//    }
+    //return list holding stored animal objects by name (sans notes)
+    public List<Animal> searchAndDisplayAnimals(Integer animalID, Integer typeID, String name) throws SQLException {
+        if (name.isEmpty() && !(typeID.equals(0)) && !(animalID.equals(0))){
+            return animalRepository.findByAnimalIDAndAnimalType(animalID, typeID);
+        } else if (!(name.isEmpty()) && typeID.equals(0) && !(animalID.equals(0))){
+            return animalRepository.findByAnimalIDOAndName(animalID, name);
+        }else if (!(name.isEmpty()) && !(typeID.equals(0)) && animalID.equals(0)){
+            return animalRepository.findByAnimalTypeAndName(typeID, name);
+        }else if (!(name.isEmpty()) && !(typeID.equals(0)) && !(animalID.equals(0))){
+            return animalRepository.findByAnimalIDAndAnimalTypeAndName(animalID, typeID, name);
+        }
+        return animalRepository.findByAnimalIDOrAnimalTypeOrName(animalID, typeID, name);
+    }
 
     //add animal to the animal table
     public void addAnimal(Animal animal) throws SQLException {
