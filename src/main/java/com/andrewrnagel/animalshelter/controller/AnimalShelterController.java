@@ -36,8 +36,9 @@ public class AnimalShelterController {
     }
 
     @RequestMapping(path = "/ListAnimals", method = RequestMethod.GET)
-    public String loadMainPage(Model model) throws SQLException {
+    public String loadMainPage(String name, Integer typeID, Integer animalID, Model model) throws SQLException {
         model.addAttribute("typesList", animalsService.getAllTypes());
+        //model.addAttribute("animalList", animalsService.getAllAnimals(name, typeID, animalID));
         model.addAttribute("animalList", animalsService.getAllAnimals());
         return "ListAnimals";
     }
