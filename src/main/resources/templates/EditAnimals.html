@@ -37,8 +37,7 @@
                             <div>
                                 <select name="type" id="type">
                                     <option value="" disabled="true" selected="true">Type</option>
-                                    <!--th:if="value = ${animal.getType}-->
-                                    <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" value="" th:text="${type.getType()}">Cat</option>
+                                    <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" value="" th:text="${type.getType()}" th:selected="${animal.getType().getTypeID() == type.getTypeID()}">Cat</option>
                                 </select><br/>
                             </div>
                             <div class="LabelText">
