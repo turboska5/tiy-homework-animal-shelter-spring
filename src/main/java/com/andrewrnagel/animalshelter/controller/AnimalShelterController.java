@@ -42,12 +42,6 @@ public class AnimalShelterController {
         return "ListAnimals";
     }
 
-    //TODO
-    @RequestMapping(path = "/ListAnimals", method = RequestMethod.POST)
-    public String searchAnimals() throws SQLException {
-        return "redirect:/ListAnimals";
-    }
-
     @RequestMapping(path = "/EditAnimals", method = RequestMethod.GET)
     public String loadEditPage(Model model,
                              @RequestParam(defaultValue = "0") Integer animalID) throws SQLException {
@@ -63,9 +57,18 @@ public class AnimalShelterController {
 
     @RequestMapping(path = "/EditAnimals", method = RequestMethod.POST)
     public String addAnimal(Animal animal) throws SQLException {
+        //existing animal
         if(animal.getAnimalID() > 0) {
             Set<Note> animalNotes = animalsService.getAnimal(animal.getAnimalID()).getAnimalNotes();
             animal.setAnimalNotes(animalNotes);
+        }
+        //generic picture check
+        if(animal.getPicture().equals("images/X.jpg")) {
+            if(animal.getType().getType().equals("Cat")) {
+                animal.setPicture("images/Cat.png");
+            } else if(animal.getType().getType().equals("Dog")) {
+                animal.setPicture("images/Dog.jpg");
+            }
         }
         animalsService.addAnimal(animal);
         return "redirect:/ListAnimals";
