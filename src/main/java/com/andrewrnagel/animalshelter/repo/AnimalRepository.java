@@ -24,9 +24,9 @@ public interface AnimalRepository extends JpaRepository<Animal, Integer> {
         //return list of animals given type (string)
     List<Animal> findByAnimalTypeAndName(Integer typeID, String name);
 
-    @Query(value = "SELECT * FROM animal WHERE animal_id = ?1 and animal_name LIKE ?3", nativeQuery = true)
+    @Query(value = "SELECT * FROM animal WHERE animal_id = ?1 and animal_name LIKE ?2", nativeQuery = true)
         //return list of animals given type (string)
-    List<Animal> findByAnimalIDOAndName(Integer animalID, String name);
+    List<Animal> findByAnimalIDAndName(Integer animalID, String name);
 
     @Query(value = "SELECT * FROM animal WHERE animal_id = ?1 and animal_type_type_id = ?2 and animal_name LIKE ?3", nativeQuery = true)
         //return list of animals given type (string)

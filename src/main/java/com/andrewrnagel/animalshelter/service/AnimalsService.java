@@ -42,7 +42,7 @@ public class AnimalsService {
         if (name.isEmpty() && !(typeID.equals(0)) && !(animalID.equals(0))){
             return animalRepository.findByAnimalIDAndAnimalType(animalID, typeID);
         } else if (!(name.isEmpty()) && typeID.equals(0) && !(animalID.equals(0))){
-            return animalRepository.findByAnimalIDOAndName(animalID, name);
+            return animalRepository.findByAnimalIDAndName(animalID, name);
         }else if (!(name.isEmpty()) && !(typeID.equals(0)) && animalID.equals(0)){
             return animalRepository.findByAnimalTypeAndName(typeID, name);
         }else if (!(name.isEmpty()) && !(typeID.equals(0)) && !(animalID.equals(0))){
