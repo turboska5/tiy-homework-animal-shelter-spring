@@ -25,14 +25,14 @@
 
                     <form th:action="ListAnimals" method="get">
 
-                        <input type="text" placeholder="Name" id="name" name="name"/>
+                        <input type="text" placeholder="Name" id="name" name="name" th:value="${lastAnimalName}"/>
 
                         <select id="type" name="type">
                             <option value="" disabled="true" selected="true">Type</option>
-                            <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" value="" th:text="${type.getType()}">Cat</option>
+                            <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" value="" th:text="${type.getType()}" th:selected="${lastAnimalType == type.getTypeID()}">Cat</option>
                         </select>
 
-                        <input type="number" placeholder="ID Number" id="animalID" name="animalID" min="1"/>
+                        <input type="number" placeholder="ID Number" id="animalID" name="animalID" min="1" th:value="${lastAnimalID}"/>
 
                         <button>Search</button>
                     </form>

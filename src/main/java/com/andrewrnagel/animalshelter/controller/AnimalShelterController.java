@@ -40,6 +40,13 @@ public class AnimalShelterController {
                                 @RequestParam(defaultValue = "") String name,
                                 @RequestParam(defaultValue = "0") Integer type,
                                 @RequestParam(defaultValue = "0") Integer animalID) throws SQLException {
+        model.addAttribute("lastAnimalName", name);
+        model.addAttribute("lastAnimalType", type);
+        if(animalID == 0) {
+            model.addAttribute("lastAnimalID", null);
+        } else {
+            model.addAttribute("lastAnimalID", animalID);
+        }
         if (name.isEmpty() && type.equals(0) && animalID.equals(0)) {
             model.addAttribute("typesList", animalsService.getAllTypes());
             model.addAttribute("animalList", animalsService.getAllAnimals());
