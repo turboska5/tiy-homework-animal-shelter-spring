@@ -42,13 +42,13 @@ public class AnimalsService {
         if (name.isEmpty() && !(typeID.equals(0)) && !(animalID.equals(0))){
             return animalRepository.findByAnimalIDAndAnimalType(animalID, typeID);
         } else if (!(name.isEmpty()) && typeID.equals(0) && !(animalID.equals(0))){
-            return animalRepository.findByAnimalIDAndName(animalID, name);
+            return animalRepository.findByAnimalIDAndNameContaining(animalID, name);
         }else if (!(name.isEmpty()) && !(typeID.equals(0)) && animalID.equals(0)){
-            return animalRepository.findByAnimalTypeAndName(typeID, name);
+            return animalRepository.findByAnimalTypeAndNameContaining(typeID, name);
         }else if (!(name.isEmpty()) && !(typeID.equals(0)) && !(animalID.equals(0))){
-            return animalRepository.findByAnimalIDAndAnimalTypeAndName(animalID, typeID, name);
+            return animalRepository.findByAnimalIDAndAnimalTypeAndNameContaining(animalID, typeID, name);
         }
-        return animalRepository.findByAnimalIDOrAnimalTypeOrName(animalID, typeID, name);
+        return animalRepository.findByAnimalIDOrAnimalTypeOrNameContaining(animalID, typeID, name);
     }
 
     //add animal to the animal table
