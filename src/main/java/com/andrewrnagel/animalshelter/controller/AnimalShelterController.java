@@ -46,8 +46,7 @@ public class AnimalShelterController {
             return "ListAnimals";
         } else {
             model.addAttribute("typesList", animalsService.getAllTypes());
-            model.addAttribute("animalList", animalsService.searchAndDisplayAnimals(animalID, type, name));
-            model.addAttribute("animalList", animalsService.searchAndDisplayAnimals(animalID, type, name));
+            model.addAttribute("animalList", animalsService.searchAndDisplayAnimals(animalID, type, "%" + name + "%"));
             return "ListAnimals";
         }
     }
