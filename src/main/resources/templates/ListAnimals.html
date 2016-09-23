@@ -22,22 +22,18 @@
             <div class="AnimalSearch">
                 <h2>List Animals</h2>
                 <p>Search for an animal:</p>
-<<<<<<< HEAD
+
                     <form th:action="ListAnimals" method="get">
-=======
-                    <form action="" method="get">
->>>>>>> refs/remotes/origin/master
-                    <!--<form th:action="@{ListAnimals(name=?.${}, type=?.${}, animalID=?.${})}" action="" method="post">-->
+
                         <input type="text" placeholder="Name" id="name" name="name"/>
-                        <select name="typeID">
+
+                        <select id="type" name="type">
                             <option value="" disabled="true" selected="true">Type</option>
                             <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" value="" th:text="${type.getType()}">Cat</option>
                         </select>
-<<<<<<< HEAD
-                        <input type="number" placeholder="ID" id="animalID" name="animalID" min="1"/>
-=======
+
                         <input type="number" placeholder="ID Number" id="animalID" name="animalID" min="1"/>
->>>>>>> refs/remotes/origin/master
+
                         <button>Search</button>
                     </form>
             </div>

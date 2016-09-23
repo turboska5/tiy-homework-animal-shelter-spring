@@ -36,7 +36,6 @@ public class AnimalShelterController {
     }
 
     @RequestMapping(path = "/ListAnimals", method = RequestMethod.GET)
-<<<<<<< HEAD
     public String searchAnimals(Model model,
                                 @RequestParam(defaultValue = "") String name,
                                 @RequestParam(defaultValue = "0") Integer type,
@@ -50,13 +49,7 @@ public class AnimalShelterController {
             model.addAttribute("animalList", animalsService.searchAndDisplayAnimals(animalID, type, name));
             return "ListAnimals";
         }
-=======
-    public String loadMainPage(String name, Integer typeID, Integer animalID, Model model) throws SQLException {
-        model.addAttribute("typesList", animalsService.getAllTypes());
-        //model.addAttribute("animalList", animalsService.getAllAnimals(name, typeID, animalID));
-        model.addAttribute("animalList", animalsService.getAllAnimals());
-        return "ListAnimals";
->>>>>>> refs/remotes/origin/master
+
     }
 
     @RequestMapping(path = "/EditAnimals", method = RequestMethod.GET)

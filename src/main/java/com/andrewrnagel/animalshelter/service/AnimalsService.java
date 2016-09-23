@@ -37,7 +37,6 @@ public class AnimalsService {
         return this.typeRepository.findAll();
     }
 
-<<<<<<< HEAD
     //return list holding stored animal objects by name (sans notes)
     public List<Animal> searchAndDisplayAnimals(Integer animalID, Integer typeID, String name) throws SQLException {
         if (name.isEmpty() && !(typeID.equals(0)) && !(animalID.equals(0))){
@@ -52,8 +51,6 @@ public class AnimalsService {
         return animalRepository.findByAnimalIDOrAnimalTypeOrName(animalID, typeID, name);
     }
 
-=======
->>>>>>> refs/remotes/origin/master
     //add animal to the animal table
     public void addAnimal(Animal animal) throws SQLException {
         this.animalRepository.save(animal);
@@ -79,8 +76,4 @@ public class AnimalsService {
         this.noteRepository.delete(noteID);
     }
 
-    //Return list meeting search criteria
-    public List<Animal> getAllAnimals(String name, Integer typeID, Integer animalID) throws SQLException {
-        return animalRepository.getAllAnimals(name, typeID, animalID);
-    }
 }
