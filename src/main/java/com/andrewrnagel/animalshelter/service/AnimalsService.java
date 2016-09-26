@@ -31,7 +31,7 @@ public class AnimalsService {
     //methods
     //return List holding ALL stored animal objects from animal table
     public List<Animal> getAllAnimals() throws SQLException {
-        return this.animalRepository.findAll();
+        return this.animalRepository.findAll(new Sort(Sort.Direction.ASC, "name"));
     }
 
     //return List holding ALL stored types from the type table
