@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
@@ -86,7 +87,14 @@ public class AnimalShelterController {
                 animal.setPicture("images/Dog.jpg");
             }
         }
-        animalsService.addAnimal(animal);
+        if(animal.getName().equals(null) || animal.getName().equals("") ||
+                animal.getType().equals(null) || animal.getType().equals("") ||
+                animal.getDescription().equals(null) || animal.getDescription().equals("")) {
+            //throw new SQLException();
+            return "redirect:/";
+        } else {
+            animalsService.addAnimal(animal);
+        }
         return "redirect:/ListAnimals";
     }
 
