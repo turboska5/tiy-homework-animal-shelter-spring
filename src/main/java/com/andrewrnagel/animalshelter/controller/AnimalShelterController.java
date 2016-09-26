@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -75,7 +75,7 @@ public class AnimalShelterController {
     public String addAnimal(Animal animal) throws SQLException {
         //existing animal
         if(animal.getAnimalID() > 0) {
-            Set<Note> animalNotes = animalsService.getAnimal(animal.getAnimalID()).getAnimalNotes();
+            List<Note> animalNotes = animalsService.getAnimal(animal.getAnimalID()).getAnimalNotes();
             animal.setAnimalNotes(animalNotes);
         }
         //generic picture check

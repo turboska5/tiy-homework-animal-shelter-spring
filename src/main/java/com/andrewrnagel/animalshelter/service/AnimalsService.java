@@ -7,7 +7,9 @@ import com.andrewrnagel.animalshelter.repo.AnimalRepository;
 import com.andrewrnagel.animalshelter.repo.NoteRepository;
 import com.andrewrnagel.animalshelter.repo.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -34,7 +36,8 @@ public class AnimalsService {
 
     //return List holding ALL stored types from the type table
     public List<Type> getAllTypes() throws SQLException {
-        return this.typeRepository.findAll();
+        List<Type> aList = this.typeRepository.findAll(new Sort(Sort.Direction.ASC, "type"));
+        return aList;
     }
 
     //return list holding stored animal objects by name (sans notes)

@@ -1,9 +1,7 @@
 package com.andrewrnagel.animalshelter.entity;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static java.lang.String.format;
 
@@ -39,7 +37,7 @@ public class Animal {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "animal_ID")
-    private Set<Note> animalNotes = new HashSet<>();
+    private List<Note> animalNotes = new ArrayList<>();
 
     //constructors
     //default constructor
@@ -87,7 +85,7 @@ public class Animal {
 
     //constructor without breed
     //used in web version when creating a new animal without a breed supplied by user
-    public Animal(Integer animalID, String name, String type, String description, int typeID, Set<Note> animalNotes) {
+    public Animal(Integer animalID, String name, String type, String description, int typeID, List<Note> animalNotes) {
         this.animalID = animalID;
         this.name = name;
         this.description = description;
@@ -122,7 +120,7 @@ public class Animal {
 //        return this.animalType.getTypeID();
 //    }
 
-    public Set<Note> getAnimalNotes() {
+    public List<Note> getAnimalNotes() {
         return this.animalNotes;
     }
 
@@ -161,7 +159,7 @@ public class Animal {
 //        this.animalType.setTypeID(animalTypeID);
 //    }
 
-    public void setAnimalNotes(Set<Note> animalNotes) {
+    public void setAnimalNotes(List<Note> animalNotes) {
         this.animalNotes = animalNotes;
     }
 
