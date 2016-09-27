@@ -12,8 +12,4 @@ import java.util.List;
  */
 
 public interface TypeRepository extends JpaRepository<Type, Integer> {
-
-    //@Query("SELECT t FROM Type t WHERE t.typeID = ?1")
-    //Type findTypeByTypeID(int typeID);
-
 }

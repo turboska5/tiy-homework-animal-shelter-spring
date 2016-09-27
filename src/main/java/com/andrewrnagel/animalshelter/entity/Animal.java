@@ -2,7 +2,6 @@ package com.andrewrnagel.animalshelter.entity;
 
 import javax.persistence.*;
 import java.util.*;
-
 import static java.lang.String.format;
 
 /**
