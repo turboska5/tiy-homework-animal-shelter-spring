@@ -1,0 +1,55 @@
+header {
+    height: 65px;
+    margin: 0 auto;
+    border-width: 0;
+    background: #397f91 url("/images/paw-prints-horizontal.jpg") repeat;
+}
+.HeaderText{
+    background: rgba(21,118,169,0.90);
+    color: white;
+    height: 100%;
+    text-align: center;
+    font-size: xx-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    font-size: xx-large;
+    text-decoration: underline;
+    margin: 0 auto;
+}
+body {
+    font-family: sans-serif;
+}
+.UserDetails {
+    padding: 5px;
+}
+input {
+    padding: .5em;
+    margin-bottom: 20px;
+    width: 35%;
+}
+
+button {
+    padding: .5em;
+}
+p{
+    margin: 2px;
+}
+.LoginForm {
+    border-width: 0;
+    padding: 1px 8px 10px;
+    margin: 0 auto;
+    font-size: large;
+}
+.LabelText {
+    float: left;
+    width: 120px;
+    font-size: medium;
+}
+.SubmitButton {
+    width: 35%;
+    transform: translateX(120px);
+}

@@ -28,6 +28,9 @@ nav ul li a {
     display: block;
     padding: 8px;
 }
+.logout {
+    float: right;
+}
 
 h2 {
     font-size: xx-large;

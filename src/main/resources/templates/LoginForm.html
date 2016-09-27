@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Animal Shelter</title>
+    <link th:href="@{css/LoginForm.css}" href="../static/css/LoginForm.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{images/Icon.png}" href="../static/images/Icon.png" rel="icon"/>
+    <header>
+        <div class="HeaderText">
+            <h1>Animal Shelter</h1>
+        </div>
+    </header>
+</head>
+<body>
+<section>
+    <div class="LoginForm">
+        <h2>Login</h2><br/>
+        <div>
+            <form class="UserDetails" th:action="@{/LoginForm}" action="/animalshelter/templates/ListAnimals.html" method="post">
+                <div class="LabelText">
+                    <label for="userName">User Name: </label>
+                </div>
+                <div>
+                    <input type="text" placeholder="User Name" id="userName" name="userName" value="" /><br/>
+                </div>
+                <div class="LabelText">
+                    <label for="password">Password: </label>
+                </div>
+                <div>
+                    <input type="password" placeholder="Password" id="password" name="password" value="" /><br/>
+                </div>
+                <div class="LabelText">
+                    <label for="login"></label>
+                </div>
+                <div class="SubmitButton">
+                    <button id="login">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>

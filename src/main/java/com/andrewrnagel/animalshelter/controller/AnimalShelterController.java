@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+
+import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -24,16 +26,16 @@ public class AnimalShelterController {
 
     @Autowired
     private AnimalsService animalsService;
-    @Autowired
-    private AnimalRepository animalRepository;
+//    @Autowired
+//    private AnimalRepository animalRepository;
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String redirectMainPage() throws SQLException {
-        return "redirect:/ListAnimals";
-    }
+//    @RequestMapping(path = "/", method = RequestMethod.GET)
+//    public String redirectMainPage() throws SQLException {
+//        return "redirect:/ListAnimals";
+//    }
 
     @RequestMapping(path = "/ListAnimals", method = RequestMethod.GET)
-    public String searchAnimals(Model model,
+    public String searchAnimals(Model model, HttpSession session,
                                 @RequestParam(defaultValue = "1") Integer page,
                                 @RequestParam(defaultValue = "5") int itemsPerPage,
                                 @RequestParam(defaultValue = "") String name,
@@ -45,6 +47,10 @@ public class AnimalShelterController {
 //        model.addAttribute("lastPage", animalPage.getTotalPages());
 //        model.addAttribute("thisPage", page);
 //        model.addAttribute("gamePage", animalPage);
+
+        if(session.getAttribute("userId") == null) {
+            return "redirect:/LoginForm";
+        }
 
         model.addAttribute("lastAnimalName", name);
         model.addAttribute("lastAnimalType", type);
@@ -65,8 +71,13 @@ public class AnimalShelterController {
     }
 
     @RequestMapping(path = "/EditAnimals", method = RequestMethod.GET)
-    public String loadEditPage(Model model,
+    public String loadEditPage(Model model, HttpSession session,
                              @RequestParam(defaultValue = "0") Integer animalID) throws SQLException {
+
+        if(session.getAttribute("userId") == null) {
+            return "redirect:/LoginForm";
+        }
+
         model.addAttribute("typesList", animalsService.getAllTypes());
         if(animalID > 0) {
             model.addAttribute("animal", animalsService.getAnimal(animalID));
@@ -78,7 +89,12 @@ public class AnimalShelterController {
     }
 
     @RequestMapping(path = "/EditAnimals", method = RequestMethod.POST)
-    public String addAnimal(Animal animal) throws SQLException {
+    public String addAnimal(Animal animal, HttpSession session) throws SQLException {
+
+        if(session.getAttribute("userId") == null) {
+            return "redirect:/LoginForm";
+        }
+
         //existing animal
         if(animal.getAnimalID() > 0) {
             List<Note> animalNotes = animalsService.getAnimal(animal.getAnimalID()).getAnimalNotes();
@@ -104,14 +120,24 @@ public class AnimalShelterController {
     }
 
     @RequestMapping(path = "/AnimalNotes", method = RequestMethod.GET)
-    public String loadNotePage(Model model,
+    public String loadNotePage(Model model, HttpSession session,
                                @RequestParam(defaultValue = "0") Integer animalID) throws SQLException {
+
+        if(session.getAttribute("userId") == null) {
+            return "redirect:/LoginForm";
+        }
+
         model.addAttribute("animal", animalsService.getAnimal(animalID));
         return "AnimalNotes";
     }
 
     @RequestMapping(path = "/AnimalNotes", method = RequestMethod.POST)
-    public String addNote(int animalID, String noteContent) throws SQLException {
+    public String addNote(int animalID, String noteContent, HttpSession session) throws SQLException {
+
+        if(session.getAttribute("userId") == null) {
+            return "redirect:/LoginForm";
+        }
+
         Animal animal = animalsService.getAnimal(animalID);
         Note note = new Note(animal, noteContent);
         animal.getAnimalNotes().add(note);
@@ -120,9 +146,14 @@ public class AnimalShelterController {
     }
 
     @RequestMapping(path = "/DeleteNote", method = RequestMethod.GET)
-    public String deleteNote(Model model,
+    public String deleteNote(Model model, HttpSession session,
                              @RequestParam(defaultValue = "0") Integer animalID,
                              @RequestParam(defaultValue = "0") Integer noteID) throws SQLException {
+
+        if(session.getAttribute("userId") == null) {
+            return "redirect:/LoginForm";
+        }
+
         model.addAttribute("animal", animalsService.getAnimal(animalID));
         animalsService.deleteNote(noteID);
         return "redirect:/AnimalNotes?animalID=" + animalID;
