@@ -16,6 +16,4 @@ public interface NoteRepository extends JpaRepository<Note, Integer> {
 
     @Query(value = "SELECT * FROM note WHERE animal_id = ?1 ORDER BY created DESC", nativeQuery = true)
     List<Note> findByAnimalOrderByDate(Integer animalID);
-
-//    List<Note> findByAnimalOrderByNoteCreationDateDesc(Integer animalID);
 }

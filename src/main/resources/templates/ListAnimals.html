@@ -29,7 +29,7 @@
                         <input type="text" placeholder="Name" id="name" name="name" th:value="${lastAnimalName}"/>
 
                         <select id="type" name="type">
-                            <option value="" disabled="true" selected="true">Type</option>
+                            <option value="" selected="true">Type</option>
                             <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" value="" th:text="${type.getType()}" th:selected="${lastAnimalType == type.getTypeID()}">Cat</option>
                         </select>
 
@@ -47,7 +47,7 @@
                 <div class="AnimalStats">
                     <ul>
                         <h1><a th:href="@{/EditAnimals?(animalID=${animal.getAnimalID()})}" href="/animalshelter/templates/EditAnimals.html" class="AnimalName" th:text="${animal.getName()}">Bob</a></h1>
-                        <li><span class="LabelText">Type: </span><span th:text="${animal.getType().getType()}">Cat</span></li>
+                        <li><span class="LabelText">Type: </span><span th:text="${animal.getAnimalType().getType()}">Cat</span></li>
                         <li><span class="LabelText">Breed: </span><span th:text="${animal.getBreed()}">Tabby</span></li>
                         <li><span class="LabelText">Description: </span><span th:text="${animal.getDescription()}">Big fat and fuzzy</span></li>
                         <li><span class="LabelText">Notes: </span><a th:href="@{/AnimalNotes?(animalID=${animal.getAnimalID()})}" href="/animalshelter/templates/AnimalNotes.html" th:text="${animal.getAnimalNotes().size() + ' note(s)'}">0 notes</a> </li>

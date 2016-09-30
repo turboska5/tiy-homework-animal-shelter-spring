@@ -16,7 +16,7 @@ public class Type {
     @Id
     @GeneratedValue
     @Column(name = "type_ID", nullable = false, unique = true)
-    private int typeID;
+    private Integer typeID;
 
     @NotNull
     @NotEmpty
@@ -28,13 +28,13 @@ public class Type {
     public Type() {}
 
     //parameterized constructor
-    public Type(int typeID, String type) {
+    public Type(Integer typeID, String type) {
         this.setTypeID(typeID);
         this.setType(type);
     }
 
     //getters
-    public int getTypeID() {
+    public Integer getTypeID() {
         return this.typeID;
     }
 
@@ -43,7 +43,7 @@ public class Type {
     }
 
     //setters
-    public void setTypeID(int typeID) {
+    public void setTypeID(Integer typeID) {
         this.typeID = typeID;
     }
 

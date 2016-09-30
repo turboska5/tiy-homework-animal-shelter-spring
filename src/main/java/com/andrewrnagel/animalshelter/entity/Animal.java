@@ -1,9 +1,9 @@
 package com.andrewrnagel.animalshelter.entity;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.*;
 import static java.lang.String.format;
@@ -45,6 +45,7 @@ public class Animal {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "animal_ID")
+    @OrderBy("noteCreationDate")
     private List<Note> animalNotes = new ArrayList<>();
 
     //constructors
@@ -116,10 +117,6 @@ public class Animal {
         return this.description;
     }
 
-    public Type getType() {
-        return this.animalType;
-    }
-
     public int getAnimalID() {
         return this.animalID;
     }
@@ -149,14 +146,12 @@ public class Animal {
         this.description = description;
     }
 
-    public void setType(Type type) {
-        this.animalType = type;
-        if(this.animalType.getType() == "Cat") {
-            this.setPicture("images/Cat.png");
-        } else if(this.animalType.getType() == "Dog") {
-            this.setPicture("images/Dog.jpg");
-        } else {
-        }
+    public Type getAnimalType() {
+        return animalType;
+    }
+
+    public void setAnimalType(Type animalType) {
+        this.animalType = animalType;
     }
 
     public void setAnimalID(int animalID) {

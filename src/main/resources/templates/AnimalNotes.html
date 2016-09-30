@@ -31,7 +31,7 @@
                 <div class="AnimalStats">
                     <ul>
                         <h1><a th:href="@{/EditAnimals?(animalID=${animal.getAnimalID()})}" href="/animalshelter/templates/EditAnimals.html" class="AnimalName" th:text="${animal.getName()}">Bob</a></h1>
-                        <li><span class="LabelText">Type: </span><span th:text="${animal.getType().getType()}">Cat</span></li>
+                        <li><span class="LabelText">Type: </span><span th:text="${animal.getAnimalType().getType()}">Cat</span></li>
                         <li><span class="LabelText">Breed: </span><span th:text="${animal.getBreed()}">Tabby</span></li>
                         <li><span class="LabelText">Description: </span><span th:text="${animal.getDescription()}">Big fat and fuzzy</span></li>
                     </ul>

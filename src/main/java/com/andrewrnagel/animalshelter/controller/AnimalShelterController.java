@@ -111,9 +111,9 @@ public class AnimalShelterController {
             }
             //generic picture check
             if(animal.getPicture().equals("images/X.jpg")) {
-                if(animal.getType().getType().equals("Cat")) {
+                if(animal.getAnimalType().getType().equals("Cat")) {
                     animal.setPicture("images/Cat.png");
-                } else if(animal.getType().getType().equals("Dog")) {
+                } else if(animal.getAnimalType().getType().equals("Dog")) {
                     animal.setPicture("images/Dog.jpg");
                 }
             }

@@ -34,13 +34,13 @@
                                 <input type="text" placeholder="Name" id="name" name="name" th:field="*{name}" th:errorclass="error" th:value="${animal.getName()}" value="Bob"/><br/>
                             </div>
                             <div class="LabelText">
-                                <label for="type">Type*: </label>
+                                <label for="animalType">Type*: </label>
                             </div>
                             <div>
-                                <ul class="error" th:hidden="true"><li th:each="err : ${#fields.errors('type')}"></li></ul>
-                                <select name="type" id="type" th:errorclass="error">
-                                    <option value="" disabled="true" selected="true">Type</option>
-                                    <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" th:text="${type.getType()}" th:selected="${animal.getType().getTypeID() == type.getTypeID()}">Cat</option>
+                                <ul class="error" th:hidden="true"><li th:each="err : ${#fields.errors('animalType')}"></li></ul>
+                                <select name="animalType" id="animalType" th:field="*{animalType}" th:errorclass="error">
+                                    <option value="" selected="true">Type</option>
+                                    <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" th:text="${type.getType()}">Cat</option>
                                 </select><br/>
                             </div>
                             <div class="LabelText">

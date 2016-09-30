@@ -80,7 +80,7 @@ public class AnimalsService {
 
     //return sorted note list in descending time order
     public List<Note> getAnimalNotesDesc(Integer animalID) {
-        List<Note> aList = this.noteRepository.findByAnimalOrderByDate(animalID);
+        List<Note> aList = this.animalRepository.findOne(animalID).getAnimalNotes();
         return aList;
     }
 }
