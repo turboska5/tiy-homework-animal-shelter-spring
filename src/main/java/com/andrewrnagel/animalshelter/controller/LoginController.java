@@ -38,7 +38,7 @@ public class LoginController {
     @RequestMapping(value = "/LoginForm", method = RequestMethod.GET)
     public String loginForm() throws PasswordStorage.CannotPerformOperationException {
         //create a sample user
-//        User user = new User("Jimmy", "jebush@gmail.com", "12345");
+//        User user = new User("Andrew", "arnagel@gmail.com", "12345");
 //        user.setPassword(PasswordStorage.createHash(user.getPassword()));
 //        userRepository.save(user);
         return "LoginForm";
