@@ -45,7 +45,7 @@
                             <th>Note</th>
                             <th> </th>
                         </tr>
-                        <tr th:each="note : ${animal.getAnimalNotes()}">
+                        <tr th:each="note : ${notesList}">
                             <td th:text="${note.getNoteCreationDateAsString()}">08/29/16</td>
                             <td th:text="${note.getNoteContent()}">Went to visit vet.</td>
                             <td><button class="DeleteButton"><a th:href="@{/DeleteNote?(animalID=${animal.getAnimalID()}, noteID=${note.getNoteID()})}"></a></button></td>

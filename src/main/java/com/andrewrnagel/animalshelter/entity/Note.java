@@ -29,7 +29,7 @@ public class Note {
     @Column(name = "note_content", nullable = false)
     private String noteContent;
 
-    @Column(name = "created_on", nullable = false)
+    @Column(name = "created", nullable = false)
     private LocalDate noteCreationDate;
 
     @Transient

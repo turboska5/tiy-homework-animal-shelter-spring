@@ -78,9 +78,9 @@ public class AnimalsService {
         this.noteRepository.delete(noteID);
     }
 
-//    //return sorted note list in descending time order
-//    public List<Note> getAnimalNotesDesc(Integer animalID) {
-//        List<Note> aList = this.noteRepository.findByAnimalId(animalID, new Sort(Sort.Direction.DESC, "created_on"));
-//        return aList;
-//    }
+    //return sorted note list in descending time order
+    public List<Note> getAnimalNotesDesc(Integer animalID) {
+        List<Note> aList = this.noteRepository.findByAnimalOrderByDate(animalID);
+        return aList;
+    }
 }

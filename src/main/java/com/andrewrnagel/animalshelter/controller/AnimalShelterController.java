@@ -132,7 +132,7 @@ public class AnimalShelterController {
 
         model.addAttribute("note", new Note());
         model.addAttribute("animal", animalsService.getAnimal(animalID));
-//        model.addAttribute("notesList", animalsService.getAnimalNotesDesc(animalID));
+        model.addAttribute("notesList", animalsService.getAnimalNotesDesc(animalID));
         return "AnimalNotes";
     }
 
