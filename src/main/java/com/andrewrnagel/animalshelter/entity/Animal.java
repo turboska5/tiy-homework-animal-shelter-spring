@@ -1,6 +1,10 @@
 package com.andrewrnagel.animalshelter.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 import static java.lang.String.format;
 
@@ -17,12 +21,16 @@ public class Animal {
     @Column(name = "animal_ID", nullable = false, unique = true)
     private int animalID;
 
+    @NotBlank
+    @NotNull
     @Column(name = "animal_name", nullable = false)
     private String name;
 
     @Column(name = "breed")
     private String breed = "";
 
+    @NotBlank
+    @NotNull
     @Column(name = "description", nullable = false)
     private String description;
 
@@ -30,6 +38,7 @@ public class Animal {
     @Column(name = "image_url", nullable = false)
     private String picture = "images/X.jpg";
 
+    @NotNull
     @ManyToOne(cascade = CascadeType.PERSIST)
     //@JoinColumn(name = "animal_ID")
     private Type animalType = new Type();

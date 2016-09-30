@@ -1,6 +1,9 @@
 package com.andrewrnagel.animalshelter.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -21,6 +24,8 @@ public class Note {
 //    @Column(name = "animal_ID", nullable = false, unique = true)
 //    private int animalID;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "note_content", nullable = false)
     private String noteContent;
 

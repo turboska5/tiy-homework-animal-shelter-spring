@@ -1,6 +1,9 @@
 package com.andrewrnagel.animalshelter.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Andrew Nagel on 9/12/16 at 3:38 PM EST.
@@ -15,6 +18,8 @@ public class Type {
     @Column(name = "type_ID", nullable = false, unique = true)
     private int typeID;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "type_name", nullable = false, unique = true)
     private String type;
 

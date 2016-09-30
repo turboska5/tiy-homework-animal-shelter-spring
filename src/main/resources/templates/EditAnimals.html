@@ -24,21 +24,23 @@
                 <h2>Add/Edit An Animal</h2>
                 <p>Note: (*) indicates a required field!</p><br/>
                     <div>
-                        <form class="AnimalDetails" th:action="EditAnimals" action="/animalshelter/templates/ListAnimals.html" method="post">
+                        <form class="AnimalDetails" th:object="${animal}" th:action="EditAnimals" action="/animalshelter/templates/ListAnimals.html" method="post">
                             <input type="hidden" id="animalID" name="animalID" th:value="${animal.getAnimalID()}" />
                             <div class="LabelText">
                                 <label for="name">Name*: </label>
                             </div>
                             <div>
-                                <input type="text" placeholder="Name" id="name" name="name" th:value="${animal.getName()}" value="Bob"/><br/>
+                                <ul class="error" th:hidden="true"><li th:each="err : ${#fields.errors('name')}"></li></ul>
+                                <input type="text" placeholder="Name" id="name" name="name" th:field="*{name}" th:errorclass="error" th:value="${animal.getName()}" value="Bob"/><br/>
                             </div>
                             <div class="LabelText">
                                 <label for="type">Type*: </label>
                             </div>
                             <div>
-                                <select name="type" id="type">
+                                <ul class="error" th:hidden="true"><li th:each="err : ${#fields.errors('type')}"></li></ul>
+                                <select name="type" id="type" th:errorclass="error">
                                     <option value="" disabled="true" selected="true">Type</option>
-                                    <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" value="" th:text="${type.getType()}" th:selected="${animal.getType().getTypeID() == type.getTypeID()}">Cat</option>
+                                    <option th:each="type : ${typesList}" th:value="${type.getTypeID()}" th:text="${type.getType()}" th:selected="${animal.getType().getTypeID() == type.getTypeID()}">Cat</option>
                                 </select><br/>
                             </div>
                             <div class="LabelText">
@@ -51,7 +53,8 @@
                                 <label for="description">Description*: </label>
                             </div>
                             <div>
-                                <textarea id="description" placeholder="Description" maxlength="64" name="description" th:text="${animal.getDescription()}">Big fat and fuzzy</textarea><br/>
+                                <ul class="error" th:hidden="true"><li th:each="err : ${#fields.errors('description')}"></li></ul>
+                                <textarea id="description" placeholder="Description" maxlength="64" name="description" th:field="*{description}" th:errorclass="error" th:text="${animal.getDescription()}">Big fat and fuzzy</textarea><br/>
                             </div>
                             <div class="LabelText">
                                 <label for="photo">Photo: </label>

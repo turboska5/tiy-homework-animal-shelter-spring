@@ -7,6 +7,7 @@ import com.andrewrnagel.animalshelter.service.AnimalsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -89,31 +91,32 @@ public class AnimalShelterController {
     }
 
     @RequestMapping(path = "/EditAnimals", method = RequestMethod.POST)
-    public String addAnimal(Animal animal, HttpSession session) throws SQLException {
+    public String addAnimal(@Valid Animal animal, BindingResult bindingResult,
+                            HttpSession session, Model model) throws SQLException {
 
         if(session.getAttribute("userId") == null) {
             return "redirect:/LoginForm";
         }
 
-        //existing animal
-        if(animal.getAnimalID() > 0) {
-            List<Note> animalNotes = animalsService.getAnimal(animal.getAnimalID()).getAnimalNotes();
-            animal.setAnimalNotes(animalNotes);
-        }
-        //generic picture check
-        if(animal.getPicture().equals("images/X.jpg")) {
-            if(animal.getType().getType().equals("Cat")) {
-                animal.setPicture("images/Cat.png");
-            } else if(animal.getType().getType().equals("Dog")) {
-                animal.setPicture("images/Dog.jpg");
-            }
-        }
-        if(animal.getName().equals(null) || animal.getName().equals("") ||
-                animal.getType().equals(null) || animal.getType().equals("") ||
-                animal.getDescription().equals(null) || animal.getDescription().equals("")) {
-            //throw new SQLException();
-            return "redirect:/";
+        if(bindingResult.hasErrors()){
+            model.addAttribute("bindingResult", bindingResult);
+            model.addAttribute("typesList", animalsService.getAllTypes());
+            model.addAttribute("animal", animal);
+            return "EditAnimals";
         } else {
+            //existing animal
+            if(animal.getAnimalID() > 0) {
+                List<Note> animalNotes = animalsService.getAnimal(animal.getAnimalID()).getAnimalNotes();
+                animal.setAnimalNotes(animalNotes);
+            }
+            //generic picture check
+            if(animal.getPicture().equals("images/X.jpg")) {
+                if(animal.getType().getType().equals("Cat")) {
+                    animal.setPicture("images/Cat.png");
+                } else if(animal.getType().getType().equals("Dog")) {
+                    animal.setPicture("images/Dog.jpg");
+                }
+            }
             animalsService.addAnimal(animal);
         }
         return "redirect:/ListAnimals";
@@ -127,21 +130,31 @@ public class AnimalShelterController {
             return "redirect:/LoginForm";
         }
 
+        model.addAttribute("note", new Note());
         model.addAttribute("animal", animalsService.getAnimal(animalID));
+//        model.addAttribute("notesList", animalsService.getAnimalNotesDesc(animalID));
         return "AnimalNotes";
     }
 
     @RequestMapping(path = "/AnimalNotes", method = RequestMethod.POST)
-    public String addNote(int animalID, String noteContent, HttpSession session) throws SQLException {
+    public String addNote(@Valid Note note, BindingResult bindingResult, HttpSession session,
+                          int animalID, String noteContent, Model model) throws SQLException {
 
         if(session.getAttribute("userId") == null) {
             return "redirect:/LoginForm";
         }
 
-        Animal animal = animalsService.getAnimal(animalID);
-        Note note = new Note(animal, noteContent);
-        animal.getAnimalNotes().add(note);
-        animalsService.addAnimal(animal);
+        if(bindingResult.hasErrors()) {
+            Animal animal = animalsService.getAnimal(animalID);
+            model.addAttribute("bindingResult", bindingResult);
+            model.addAttribute("animal", animal);
+            return "AnimalNotes";
+        } else {
+            Animal animal = animalsService.getAnimal(animalID);
+            note = new Note(animal, noteContent);
+            animal.getAnimalNotes().add(note);
+            animalsService.addAnimal(animal);
+        }
         return "redirect:/AnimalNotes?animalID=" + animalID;
     }
 

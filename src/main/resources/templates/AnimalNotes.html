@@ -54,13 +54,14 @@
                 </div>
             </article>
             <article>
-                <form class="AddNote" th:action="AnimalNotes" action="AnimalNotes.html" method="post">
+                <form class="AddNote" th:action="AnimalNotes" action="AnimalNotes.html" method="post" th:object="${note}">
                     <input type="hidden" id="animalID" name="animalID" th:value="${animal.getAnimalID()}" />
                     <div class="AddAnimalNote">
                         Add a note:
-                        <p>
-                            <textarea class="AddAnimalNoteText" id="noteContent" name="noteContent" th:text="${''}">This cat seriously needs a bath. This means we need to buy some chainmail.</textarea>
-                        </p>
+                        <ul class="error" th:hidden="true"><li th:each="err : ${#fields.errors('noteContent')}"></li></ul>
+                            <p>
+                                <textarea class="AddAnimalNoteText" id="noteContent" name="noteContent" th:field="*{noteContent}" th:errorclass="error" th:text="${''}">This cat seriously needs a bath. This means we need to buy some chainmail.</textarea>
+                            </p>
                     </div>
                     <div>
                         <button class="AddNoteButton">Add Note</button>
